@@ -1,0 +1,6 @@
+body {background: #282827;font-family: arial, helvetica, sans-serif;font-size: 14px;line-height: 23px;color: #FFF;}
+
+.item {width: 25%; border: solid 0.2em;padding: 1em;background-color: #444;border-radius: 1em;font-size: 12px;line-height: 18px;margin: 0.3em auto 1em auto;}
+.item.w2 { width: 50%; }
+.item.w3 { width: 75%; }
+.item.w4 { width: 100%; }
