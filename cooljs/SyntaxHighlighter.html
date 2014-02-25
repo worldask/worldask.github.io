@@ -1,0 +1,37 @@
+<!--https://github.com/alexgorbatchev/SyntaxHighlighter-->
+<!--http://cdnjs.com/libraries/SyntaxHighlighter/-->
+<!--http://www.addyosmani.com/resources/essentialjsdesignpatterns/book/-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Learning JavaScript Design Patterns</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css">
+<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeEmacs.min.css">
+</head>
+<body>
+<div class="container inner wrap">
+<pre class="brush: js">
+// A car "class"
+function Car( model ) {
+  this.model = model;
+  this.color = "silver";
+  this.year  = "2012";
+
+  this.getInfo = function () {
+    return this.model + " " + this.year;
+  };
+}
+</pre>
+</div>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script>
+$(function() {
+  SyntaxHighlighter.all();
+});
+</script>
+</body>
+</html>

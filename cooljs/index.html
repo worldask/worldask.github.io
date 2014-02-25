@@ -1,0 +1,56 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Cool JS</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="vendor/jquery.min.js"></script>
+</head>
+<body>
+
+<!--Masonry cascading grid layout library https://github.com/desandro/masonry-->
+<script src="vendor/masonry.pkgd.min.js"></script>
+<div id="container">
+	<!--简单菜单 http://demo.tutorialzine.com/2010/06/css3-minimalistic-navigation-menu/demo.html-->
+	<div class="item">
+		<link rel="stylesheet" type="text/css" href="vendor/navigationMenu/style.css" />
+		<ul id="navigationMenu">
+		    <li><a class="home" href="#"><span>Home</span></a></li>
+		    <li><a class="about" href="#"><span>About</span></a></li>
+		    <li><a class="services" href="#"><span>Services</span></a></li>
+		    <li><a class="portfolio" href="#"><span>Portfolio</span></a></li>
+		    <li><a class="contact" href="#"><span>Contact us</span></a></li>
+		</ul>
+	</div>
+
+	<!--弹出工具栏 http://paulkinzett.github.io/toolbar/-->
+	<div class="item">
+		<script src="vendor/paulkinzett-toolbar/jquery.toolbar.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="vendor/paulkinzett-toolbar/jquery.toolbars.css" />
+		<link rel="stylesheet" type="text/css" href="vendor/paulkinzett-toolbar/bootstrap.icons.css" />
+		<div id="normal-button" class="settings-button" style="text-align:center;"><img src="vendor/paulkinzett-toolbar/documentation/img/icon-cog-small.png"></div>
+		<div id="user-toolbar-options" style="display:none;">
+			<a href="#"><i class="icon-user"></i></a>
+			<a href="#"><i class="icon-star"></i></a>
+			<a href="#"><i class="icon-edit"></i></a>
+			<a href="#"><i class="icon-delete"></i></a>
+			<a href="#"><i class="icon-ban"></i></a>
+		</div>
+		<script>
+			$('#normal-button').toolbar({
+				content: '#user-toolbar-options', 
+				position: 'bottom'
+			});
+		</script>
+	</div>
+</div>
+<script>
+var container = document.querySelector('#container');
+var msnry = new Masonry( container, {
+  // options
+  columnWidth: 200,
+  itemSelector: '.item'
+});
+</script>
+</body>
+</html>
