@@ -43,6 +43,19 @@
 			});
 		</script>
 	</div>
+
+	<!--fancyInput https://github.com/yairEO/fancyInput-->
+	<div class="item w2">
+		<link rel="stylesheet" type="text/css" href="vendor/fancyInput/fancyInput.css" />
+        <link rel="stylesheet" type="text/css" href="vendor/fancyInput/styles.css" />
+		<script src="vendor/fancyInput/fancyInput.js"></script>
+		<div id="fancyInput" style="width:90%">
+		    FancyInput <input type="text" />
+		</div>
+		<script>
+            $('#fancyInput :input').fancyInput();
+        </script>
+	</div>
 </div>
 <script>
 var container = document.querySelector('#container');
