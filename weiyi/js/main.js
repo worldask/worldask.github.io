@@ -43,19 +43,15 @@ $(document).ready(function() {
                             }
 
                             $.each(popData, function(i, v) {
-                                // 预读取图片宽高
-                                // imgReady("data/images/" + v, function () {
-                                //     $("#pop").append("<div style='float:left; width: " + this.width + "; height: " + this.height + ";'></div>")
-                                // });
-
                                 $("#invisible").append("<img src='data/images/" + v + "' />");
                             });
 
+
+                            // 全部图片加载完成后显示
                             var loadedimages = 0;
                             $("#invisible img").load(function() {
                                 ++loadedimages; 
                                 if(loadedimages == popData.length){
-                                    // 全部图片加载完成后显示
                                     hideIosNotify();
                                     $("#pop").html($("#invisible").html());
                                     $("#invisible").html("");
@@ -96,9 +92,14 @@ var next = function() {
     i = (page - 1) * perPage;
     
     for (var j = 0; i < objData.length && j < perPage; i++, j++) {
-        $("#container").append("<img src='data/images/" + objData[i].cover + "' json='" + objData[i].json + "'/>");
+        // 预读取图片宽高，延迟加载图片
+        // imgReady("data/images/" + objData[i].cover, function () {
+        //     $("#container").append("<img src='js/loader.gif' data-src='data/images/" + objData[i].cover + "' json='" + objData[i].json + "' width='" + this.width + "' height='" + this.height + "' />");
+        // });
+         $("#container").append("<img src='js/loader.gif' data-src='data/images/" + objData[i].cover + "' json='" + objData[i].json + "' />");
     }
     page++;
+    $("img").unveil();
 };
 
 // ios风格载入框
