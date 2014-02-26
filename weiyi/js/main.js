@@ -1,7 +1,7 @@
 // 当前页号
 var page = 1;
 // 每页几条数据
-var perPage = 100;
+var perPage = 5;
 // 主json对象
 var objData = {};
 // 距底部几像素刷新
