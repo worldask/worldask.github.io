@@ -32,7 +32,6 @@ $(document).ready(function() {
                     // 获取作品json
                     $.ajax({url: "data/json/" + json,
                         success: function(data) {
-                            hideIosNotify();
                             $("#backdrop").removeClass("dn");
                             $("#popContainer").removeClass("dn");
 
@@ -44,7 +43,23 @@ $(document).ready(function() {
                             }
 
                             $.each(popData, function(i, v) {
-                                $("#pop").append("<img src='data/images/" + v + "' />");
+                                // 预读取图片宽高
+                                // imgReady("data/images/" + v, function () {
+                                //     $("#pop").append("<div style='float:left; width: " + this.width + "; height: " + this.height + ";'></div>")
+                                // });
+
+                                $("#invisible").append("<img src='data/images/" + v + "' />");
+                            });
+
+                            var loadedimages = 0;
+                            $("#invisible img").load(function() {
+                                ++loadedimages; 
+                                if(loadedimages == popData.length){
+                                    // 全部图片加载完成后显示
+                                    hideIosNotify();
+                                    $("#pop").html($("#invisible").html());
+                                    $("#invisible").html("");
+                                }
                             });
                         }
                     });
@@ -86,6 +101,7 @@ var next = function() {
     page++;
 };
 
+// ios风格载入框
 var _iosOverlay = null;
 
 var showIosNotify = function(text) {
