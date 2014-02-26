@@ -1,29 +1,33 @@
 // 当前页号
 var page = 1;
 // 每页几条数据
-var perPage = 5;
+var perPage = 100;
 // 主json对象
 var objData = {};
 // 距底部几像素刷新
 var scrollPixles = 20;
 
-$(function() {
-    // 首次载入
+$(document).ready(function() {
+    // 首次载入，获取主json
     $.ajax({url: "data/main.json", 
         success: function(data) {
             objData = $.parseJSON(data);
+            // 获取第一页数据
             next();
 
+            // 绑定图片点击事件
             $("#container").on("click", "img", function(event) {
                 event.preventDefault();
 
                 // 载入作品图片
                 var json = $(this).attr("json");
                 if (json !== 'undefined' && json !== "") {
+                    // 获取作品json
                     $.ajax({url: "data/json/" + json,
                         success: function(data) {
                             $("#backdrop").removeClass("dn");
                             $("#popContainer").removeClass("dn");
+                            $("#pop").html("");
                             var popData = $.parseJSON(data);
 
                             $.each(popData, function(i, v) {
@@ -56,7 +60,7 @@ $(function() {
 var closePopContainer = function() {
     $("#backdrop").addClass("dn");
     $("#popContainer").addClass("dn");
-    $("#pop").html("");
+    //$("#pop").html("");
 };
 
 // 翻页
