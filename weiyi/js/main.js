@@ -11,8 +11,11 @@ $(document).ready(function() {
     // 首次载入，获取主json
     $.ajax({url: "data/main.json", 
         success: function(data) {
-            //objData = $.parseJSON(data);
-            objData = (data);
+            if (typeof(data) == "string") {
+                objData = $.parseJSON(data);
+            } else {
+                objData = (data);
+            }
             // 获取第一页数据
             next();
 
@@ -25,11 +28,17 @@ $(document).ready(function() {
                 if (json !== 'undefined' && json !== "") {
                     // 获取作品json
                     $.ajax({url: "data/json/" + json,
-                        success: function(popData) {
+                        success: function(data) {
                             $("#backdrop").removeClass("dn");
                             $("#popContainer").removeClass("dn");
                             $("#pop").html("");
-                            //var popData = $.parseJSON(data);
+
+                            var popData;
+                            if (typeof(data) == "string") {
+                                popData = $.parseJSON(data);
+                            } else {
+                                popData = data;
+                            }
 
                             $.each(popData, function(i, v) {
                                 $("#pop").append("<img src='data/images/" + v + "' />");
