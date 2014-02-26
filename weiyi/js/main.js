@@ -26,12 +26,15 @@ $(document).ready(function() {
                 // 载入作品图片
                 var json = $(this).attr("json");
                 if (json !== 'undefined' && json !== "") {
+                    $("#pop").html("");
+                    showIosNotify("Loading...");
+
                     // 获取作品json
                     $.ajax({url: "data/json/" + json,
                         success: function(data) {
+                            hideIosNotify();
                             $("#backdrop").removeClass("dn");
                             $("#popContainer").removeClass("dn");
-                            $("#pop").html("");
 
                             var popData;
                             if (typeof(data) == "string") {
@@ -82,3 +85,42 @@ var next = function() {
     }
     page++;
 };
+
+var _iosOverlay = null;
+
+var showIosNotify = function(text) {
+    if (!_iosOverlay) {
+        var opts = {
+            lines: 13, // The number of lines to draw
+            length: 11, // The length of each line
+            width: 5, // The line thickness
+            radius: 17, // The radius of the inner circle
+            corners: 1, // Corner roundness (0..1)
+            rotate: 0, // The rotation offset
+            color: '#FFF', // #rgb or #rrggbb
+            speed: 1, // Rounds per second
+            trail: 60, // Afterglow percentage
+            shadow: false, // Whether to render a shadow
+        };
+        var target = document.createElement("div");
+        document.body.appendChild(target);
+        var spinner = new Spinner(opts).spin(target);
+        _iosOverlay = iosOverlay({
+            text: text,
+            //duration: 2e33,
+            spinner: spinner
+        });
+    } else {
+        _iosOverlay.update({
+            text:text,
+        });
+    }
+};
+
+var hideIosNotify = function(text, icon) {
+    if (_iosOverlay) {
+        _iosOverlay.hide();
+        _iosOverlay.destroy();
+        _iosOverlay = null;
+    }
+}
