@@ -19,6 +19,15 @@ $(document).ready(function() {
             // 获取第一页数据
             next();
 
+            // 绑定图片onmouseover事件
+            $("#container").on("mouseover", "img", function(event) {
+                event.preventDefault();
+
+                // 弹出层
+                var text = $(this).attr("text");
+                $(this).after("<div style='position: absolute; background-color: #FFF; left: " + $(this).css("left") + "; top: " + $(this).css("top") + "; width: " + $(this).width() + "; height: " + $(this).height() + "'>" + text + "</div>");
+            });
+
             // 绑定图片点击事件
             $("#container").on("click", "img", function(event) {
                 event.preventDefault();
@@ -106,7 +115,10 @@ var next = function() {
         // imgReady("data/images/" + objData[i].cover, function () {
         //     $("#container").append("<img src='js/loader.gif' data-src='data/images/" + objData[i].cover + "' json='" + objData[i].json + "' width='" + this.width + "' height='" + this.height + "' />");
         // });
-         $("#container").append("<img src='js/loader.gif' data-src='data/images/" + objData[i].cover + "' json='" + objData[i].json + "' />");
+         $("#container").append("<img src='js/loader.gif' data-src='data/images/" + objData[i].cover + "' json='" + objData[i].json + "' text='" + objData[i].text + "' id='img" + objData[i].cover + "' />");
+         // $("#container").on("mouseover", "#" + objData[i].cover, function() {
+         //    $("#container").append("<div id='div" + objData[i].cover + "'>" + objData[i].text + "</div>");
+         // });
     }
     page++;
     $("img").unveil();
