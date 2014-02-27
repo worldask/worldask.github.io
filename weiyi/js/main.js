@@ -88,6 +88,7 @@ var pop = function(json) {
 
 // 关闭弹出层
 var closePopContainer = function() {
+    $("#popContainer").stop();
     $("#popContainer").fadeOut(200, function() {
         $("#backdrop").addClass("dn");
         $("#popContainer").addClass("dn");
