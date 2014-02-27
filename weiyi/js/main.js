@@ -23,45 +23,9 @@ $(document).ready(function() {
             $("#container").on("click", "img", function(event) {
                 event.preventDefault();
 
-                // 载入作品图片
+                // 弹出层
                 var json = $(this).attr("json");
-                if (json !== 'undefined' && json !== "") {
-                    $("#pop").html("");
-                    showIosNotify("Loading...");
-
-                    // 获取作品json
-                    $.ajax({url: "data/json/" + json,
-                        success: function(data) {
-                            $("#backdrop").removeClass("dn");
-                            $("#popContainer").fadeIn(2000, function() {
-                                $("#popContainer").removeClass("dn");
-                            });
-
-                            var popData;
-                            if (typeof(data) == "string") {
-                                popData = $.parseJSON(data);
-                            } else {
-                                popData = data;
-                            }
-
-                            $.each(popData, function(i, v) {
-                                $("#invisible").append("<img src='data/images/" + v + "' />");
-                            });
-
-
-                            // 全部图片加载完成后显示
-                            var loadedimages = 0;
-                            $("#invisible img").load(function() {
-                                ++loadedimages; 
-                                if(loadedimages == popData.length){
-                                    hideIosNotify();
-                                    $("#pop").html($("#invisible").html());
-                                    $("#invisible").html("");
-                                }
-                            });
-                        }
-                    });
-                }
+                pop(json);
             });
         }
     });
@@ -81,6 +45,46 @@ $(document).ready(function() {
         }
     });
 });
+
+var pop = function(json) {
+    if (json !== 'undefined' && json !== "") {
+        $("#pop").html("");
+        showIosNotify("Loading...");
+
+        // 获取作品json
+        $.ajax({url: "data/json/" + json,
+            success: function(data) {
+                $("#backdrop").removeClass("dn");
+                $("#popContainer").fadeIn(2000, function() {
+                    $("#popContainer").removeClass("dn");
+                });
+
+                var popData;
+                if (typeof(data) == "string") {
+                    popData = $.parseJSON(data);
+                } else {
+                    popData = data;
+                }
+
+                // 先在不可见区域下载图片
+                $.each(popData, function(i, v) {
+                    $("#invisible").append("<img src='data/images/" + v + "' />");
+                });
+
+                // 全部图片下载完成后显示弹出层
+                var loadedimages = 0;
+                $("#invisible img").load(function() {
+                    ++loadedimages; 
+                    if(loadedimages == popData.length){
+                        hideIosNotify();
+                        $("#pop").html($("#invisible").html());
+                        $("#invisible").html("");
+                    }
+                });
+            }
+        });
+    } 
+};
 
 // 关闭弹出层
 var closePopContainer = function() {
