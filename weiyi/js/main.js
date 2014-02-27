@@ -33,7 +33,9 @@ $(document).ready(function() {
                     $.ajax({url: "data/json/" + json,
                         success: function(data) {
                             $("#backdrop").removeClass("dn");
-                            $("#popContainer").removeClass("dn");
+                            $("#popContainer").fadeIn(2000, function() {
+                                $("#popContainer").removeClass("dn");
+                            });
 
                             var popData;
                             if (typeof(data) == "string") {
@@ -82,8 +84,10 @@ $(document).ready(function() {
 
 // 关闭弹出层
 var closePopContainer = function() {
-    $("#backdrop").addClass("dn");
-    $("#popContainer").addClass("dn");
+    $("#popContainer").fadeOut(200, function() {
+        $("#backdrop").addClass("dn");
+        $("#popContainer").addClass("dn");
+    });
 };
 
 // 翻页
