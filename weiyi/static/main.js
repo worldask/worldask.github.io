@@ -41,7 +41,7 @@ $(document).ready(function() {
             });
 
             // 绑定图片点击事件
-            $("#container").on("click", "img", function(event) {
+            $("#container").on("click", ".divImg", function(event) {
                 event.preventDefault();
 
                 // 弹出层
