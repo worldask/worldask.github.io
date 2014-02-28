@@ -20,12 +20,24 @@ $(document).ready(function() {
             next();
 
             // 绑定图片onmouseover事件
-            $("#container").on("mouseover", "img", function(event) {
+            $("#container").on("mouseover", ".divImg", function(event) {
+                // TODO: 如图片未完全载入，则中止
                 event.preventDefault();
+                
+                // div重新定位
+                $(this).css("left", getElementLeft(this));
+                $(this).css("top", getElementTop(this));
+                $(this).width($(this).children().first().width()); 
+                $(this).height($(this).children().first().height()); 
+                $($(this).children()[0]).toggleClass("dn");
+                $($(this).children()[1]).toggleClass("dn");
+            });
 
-                // 弹出层
-                var text = $(this).attr("text");
-                $(this).after("<div style='position: absolute; background-color: #FFF; left: " + $(this).css("left") + "; top: " + $(this).css("top") + "; width: " + $(this).width() + "; height: " + $(this).height() + "'>" + text + "</div>");
+            // 绑定图片onmouseout事件
+            $("#container").on("mouseout", ".divImg", function(event) {
+                event.preventDefault();
+                $($(this).children()[0]).toggleClass("dn");
+                $($(this).children()[1]).toggleClass("dn");
             });
 
             // 绑定图片点击事件
@@ -108,20 +120,24 @@ var closePopContainer = function() {
 // 翻页
 var next = function() {
     var i = 0;
+    var text = "";
     i = (page - 1) * perPage;
     
     for (var j = 0; i < objData.length && j < perPage; i++, j++) {
         // 预读取图片宽高，延迟加载图片
-        // imgReady("data/images/" + objData[i].cover, function () {
-        //     $("#container").append("<img src='js/loader.gif' data-src='data/images/" + objData[i].cover + "' json='" + objData[i].json + "' width='" + this.width + "' height='" + this.height + "' />");
-        // });
-         $("#container").append("<img src='js/loader.gif' data-src='data/images/" + objData[i].cover + "' json='" + objData[i].json + "' text='" + objData[i].text + "' id='img" + objData[i].cover + "' />");
-         // $("#container").on("mouseover", "#" + objData[i].cover, function() {
-         //    $("#container").append("<div id='div" + objData[i].cover + "'>" + objData[i].text + "</div>");
-         // });
+       // var item = objData[i];
+       //  imgReady("data/images/" + item.cover, function () {
+       //      $("#container").append("<div class='divImg' style='width: " + this.width + "; height: " + this.height + "'><img src='static/loader.gif' data-src='data/images/" + item.cover + "' json='" + item.json + "' /></div>");
+       //  });
+         
+         text = objData[i].text;
+         if (text == undefined) {
+             text = "";
+         }
+         $("#container").append("<div class='divImg' json='" + objData[i].json + "' id='" + objData[i].cover + "'><img src='static/loader.gif' data-src='data/images/" + objData[i].cover + "' /><div class='divText dn'>" + text + "</div></div>");
     }
     page++;
-    $("img").unveil();
+    $("#container img").unveil();
 };
 
 // ios风格载入框
@@ -162,4 +178,26 @@ var hideIosNotify = function(text, icon) {
         _iosOverlay.destroy();
         _iosOverlay = null;
     }
+}
+
+// 获取元素绝对横坐标
+function getElementLeft(element){
+    var actualLeft = element.offsetLeft;
+    var current = element.offsetParent;
+    while (current !== null){
+        actualLeft += current.offsetLeft;
+        current = current.offsetParent;
+    }
+    return actualLeft;
+}
+
+// 获取元素绝对纵坐标
+function getElementTop(element){
+    var actualTop = element.offsetTop;
+    var current = element.offsetParent;
+    while (current !== null){
+        actualTop += current.offsetTop;
+        current = current.offsetParent;
+    }
+    return actualTop;
 }

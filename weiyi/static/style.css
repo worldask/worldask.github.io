@@ -13,3 +13,5 @@ img {margin: 0; padding: 0;}
 #pop {left: -50%; position: relative;}
 #backdrop {background-color: #000; bottom: 0; left: 0; position: fixed; right: 0; top: 0; opacity: 0.6; z-index: 800;}
 #invisible {left: -10000px;}
+.divImg {float:left; table-layout: fixed; background-color: #FFF; word-wrap: break-word; overflow: hidden; display: inline;}
+.divImg img {vertical-align:bottom;}
