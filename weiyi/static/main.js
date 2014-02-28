@@ -16,19 +16,22 @@ $(document).ready(function() {
             } else {
                 objData = (data);
             }
+
             // 获取第一页数据
             next();
 
             // 绑定图片onmouseover事件
             $("#container").on("mouseover", ".divImg", function(event) {
-                // TODO: 如图片未完全载入，则中止
                 event.preventDefault();
+                // TODO: 如图片未完全载入，则中止
                 
                 // div重新定位
                 $(this).css("left", getElementLeft(this));
                 $(this).css("top", getElementTop(this));
                 $(this).width($(this).children().first().width()); 
                 $(this).height($(this).children().first().height()); 
+
+                // 切换显示图片或文字说明
                 $($(this).children()[0]).toggleClass("dn");
                 $($(this).children()[1]).toggleClass("dn");
             });
@@ -36,6 +39,8 @@ $(document).ready(function() {
             // 绑定图片onmouseout事件
             $("#container").on("mouseout", ".divImg", function(event) {
                 event.preventDefault();
+
+                // 切换显示图片或文字说明
                 $($(this).children()[0]).toggleClass("dn");
                 $($(this).children()[1]).toggleClass("dn");
             });
@@ -52,7 +57,7 @@ $(document).ready(function() {
     });
 
     // 绑定下拉事件
-    $(window).bind("scroll", function(){
+    $(window).on("scroll", function(){
         if( $(document).scrollTop() + $(window).height() > $(document).height() - scrollPixles){
             next();
         }
@@ -67,6 +72,7 @@ $(document).ready(function() {
     });
 });
 
+// 点击图片弹出层
 var pop = function(json) {
     if (json !== 'undefined' && json !== "") {
         $("#pop").html("");
