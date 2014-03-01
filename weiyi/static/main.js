@@ -56,8 +56,11 @@ $(document).ready(function() {
             $("#container").on("click", ".divNode", function(event) {
                 event.preventDefault();
 
-                // 弹出层
-                pop($(this));
+                // 未弹出层时响应
+                if ($($(this).children()[2]).css("display") != "block") {
+                    // 弹出层
+                    pop($(this));
+                }
             });
         }
     });
@@ -71,7 +74,7 @@ $(document).ready(function() {
 
     // 点击背景层关闭弹出层
     $(document).on("click", function(e) {
-        if ($(e.target).closest(".z1000").length > 0) {
+        if ($(e.target).children().closest(".z1000").length > 0 || $(e.target).closest("img").length > 0) {
         } else {
             closePopContainer();
         }
@@ -82,15 +85,15 @@ $(document).ready(function() {
 var pop = function(element) {
     currentDiv = element;
     $("#backdrop").removeClass("dn");
-    $(element).addClass("z1000");
+    $(element.children()[2]).addClass("z1000");
     $(element).children().addClass("dn");
     $(element.children()[2]).removeClass("dn"); 
 };
 
 // 关闭弹出层
 var closePopContainer = function() {
-    $(currentDiv).removeClass("z1000");
     $(currentDiv).children().addClass("dn");
+    $(currentDiv.children()[2]).removeClass("z1000");
     $(currentDiv.children()[0]).removeClass("dn");
     hideIosNotify();
     $("#backdrop").addClass("dn");
@@ -117,9 +120,9 @@ var next = function() {
          }
 
          // 创建节点
-         strDiv = "<div class='divNode' json='" + objData[i].json + "' id='" + objData[i].cover + "'>";
+         strDiv = "<div class='divNode' id='" + objData[i].cover + "'>";
         //<video src="data/201401211357340000.mov" style="vertical-align:bottom"></video>
-         strDiv += "<img class='divImg' src='static/loader.gif' data-src='data/images/" + objData[i].cover + "' />";
+         strDiv += "<img class='divMedia' src='static/loader.gif' data-src='data/images/" + objData[i].cover + "' />";
          strDiv += "<div class='divText dn'>" + text + "</div>";
          strDiv += "<div class='divPop dn'><img src='" + imgPop + "' /></div>";
          strDiv += "</div>";
