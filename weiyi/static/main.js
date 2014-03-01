@@ -30,8 +30,8 @@ $(document).ready(function() {
                 // 未弹出层时响应
                 if ($($(this).children()[2]).css("display") != "block") {
                     // div重新定位
-                    $(this).css("left", getElementLeft(this));
-                    $(this).css("top", getElementTop(this));
+                    $(this).css("left", getElementViewLeft(this));
+                    $(this).css("top", getElementViewTop(this));
                     $(this).width($($(this).children()[0]).width()); 
                     $(this).height($($(this).children()[0]).height()); 
 
@@ -198,4 +198,35 @@ function getElementTop(element){
         current = current.offsetParent;
     }
     return actualTop;
+}
+
+// 获取相对于浏览器窗口左上角的坐标
+function getElementViewLeft(element) {
+    var actualLeft = element.offsetLeft;
+    var current = element.offsetParent;
+    while (current !== null) {
+    　　actualLeft += current.offsetLeft;
+    　　current = current.offsetParent;
+    }
+    if (document.compatMode == "BackCompat") {
+    　　var elementScrollLeft=document.body.scrollLeft;
+    } else {
+    　　var elementScrollLeft=document.documentElement.scrollLeft; 
+    }
+    return actualLeft-elementScrollLeft;
+}
+
+function getElementViewTop(element) {
+    var actualTop = element.offsetTop;
+    var current = element.offsetParent;
+    while (current !== null) {
+        actualTop += current. offsetTop;
+        current = current.offsetParent;
+    }
+    if (document.compatMode == "BackCompat") {
+        var elementScrollTop=document.body.scrollTop;
+    } else {
+        var elementScrollTop=document.documentElement.scrollTop; 
+    }
+    return actualTop-elementScrollTop;
 }

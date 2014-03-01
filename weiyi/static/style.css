@@ -6,7 +6,7 @@ img {margin: 0; padding: 0;}
 /* common */
 .dn {display: none;}
 .db {display: block;}
-.z1000 {z-index: 1000; position: fixed;}
+.z1000 {z-index: 1000; position: absolute;}
 
 /* special */
 #head {left:0px; background:#cccccc; text-decoration: none; width:100%; position: fixed;}
