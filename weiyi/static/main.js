@@ -74,7 +74,7 @@ $(document).ready(function() {
 
     // 点击背景层关闭弹出层
     $(document).on("click", function(e) {
-        if ($(e.target).children().closest(".z1000").length > 0 || $(e.target).closest("img").length > 0) {
+        if ($(e.target).children().closest(".z1000").length > 0 || $(e.target).closest("img").length > 0 || $(e.target).closest("video").length > 0) {
         } else {
             closePopContainer();
         }
@@ -127,7 +127,7 @@ var next = function() {
          strDiv += "<img class='divMedia' src='static/loader.gif' data-src='data/images/" + objData[i].cover + "' />";
          strDiv += "<div class='divText dn'>" + text + "</div>";
          if (mediaPop.indexOf(".mov") > 1) {
-             strDiv += "<div class='divPop dn'><video src='" + mediaPop + "' autoplay /></div>";
+             strDiv += "<div class='divPop dn'><video src='" + mediaPop + "' autoplay='autoplay'>您的浏览器不支持播放该视频</video></div>";
          } else {
              strDiv += "<div class='divPop dn'><img src='" + mediaPop + "' /></div>";
          }
