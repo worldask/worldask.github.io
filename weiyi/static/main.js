@@ -84,10 +84,13 @@ $(document).ready(function() {
 // 点击图片弹出层
 var pop = function(element) {
     currentDiv = element;
-    $("#backdrop").removeClass("dn");
-    $(element.children()[2]).addClass("z1000");
-    $(element).children().addClass("dn");
-    $(element.children()[2]).removeClass("dn"); 
+
+    if ($(element.children()[2]).children().first().attr("src") != "") {
+        $("#backdrop").removeClass("dn");
+        $(element.children()[2]).addClass("z1000");
+        $(element).children().addClass("dn");
+        $(element.children()[2]).removeClass("dn"); 
+    }
 };
 
 // 关闭弹出层
