@@ -6,7 +6,8 @@ img {margin: 0; padding: 0;}
 /* common */
 .dn {display: none;}
 .db {display: block;}
-.z1000 {z-index: 1000; position: absolute;}
+.z1000 {z-index: 1000;}
+.pa {position: absolute;}
 
 /* special */
 #head {left:0px; background:#cccccc; text-decoration: none; width:100%; position: fixed;}
@@ -16,3 +17,4 @@ img {margin: 0; padding: 0;}
 .divNode {float:left; table-layout: fixed; background-color: #FFF; word-wrap: break-word; overflow: hidden;}
 .divPop {overflow: hidden; z-index: 900;}
 .divMedia {vertical-align:bottom;}
+.divTitle {background-color: #FFF; width: 100%; position: absolute;}

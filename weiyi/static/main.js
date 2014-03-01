@@ -79,24 +79,39 @@ $(document).ready(function() {
             closePopContainer();
         }
     });
+
+    // 点击关闭按钮关闭弹出层
+    $(".divTitle").on("click", "#close", function(e) {
+        closePopContainer();
+    });
 });
 
 // 点击图片弹出层
 var pop = function(element) {
     currentDiv = element;
 
+    // 存在图片或视频才弹出
     if ($(element.children()[2]).children().first().attr("src") != "") {
         $("#backdrop").removeClass("dn");
-        $(element.children()[2]).addClass("z1000");
+        $(element.children()[2]).addClass("z1000 pa");
         $(element).children().addClass("dn");
         $(element.children()[2]).removeClass("dn"); 
+        
+        // 创建标题栏
+        var divTitle = "<div class='divTitle'>&nbsp;&nbsp;<a href='javascript:' id='close'>close</a></div>";
+        $("#container").append(divTitle);
+        $(".divTitle").prepend($(element.children()[1]).html());
+        $(".divTitle").css("top", getElementTop(element[0]) - $(".divTitle").first().height()); 
+        $(".divTitle").css("left", getElementLeft(element[0])); 
+        $(".divTitle").addClass("z1000");
     }
 };
 
 // 关闭弹出层
 var closePopContainer = function() {
+    $(".divTitle").remove();
     $(currentDiv).children().addClass("dn");
-    $(currentDiv.children()[2]).removeClass("z1000");
+    $(currentDiv.children()[2]).removeClass("z1000 pa");
     $(currentDiv.children()[0]).removeClass("dn");
     hideIosNotify();
     $("#backdrop").addClass("dn");
@@ -220,7 +235,7 @@ function getElementViewTop(element) {
     var actualTop = element.offsetTop;
     var current = element.offsetParent;
     while (current !== null) {
-        actualTop += current. offsetTop;
+        actualTop += current.offsetTop;
         current = current.offsetParent;
     }
     if (document.compatMode == "BackCompat") {
