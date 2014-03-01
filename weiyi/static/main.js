@@ -6,6 +6,8 @@ var perPage = 5;
 var objData = {};
 // 距底部几像素刷新
 var scrollPixles = 20;
+// 当前打开的div
+var currentDiv = {};
 
 $(document).ready(function() {
     // 首次载入，获取主json
@@ -21,37 +23,41 @@ $(document).ready(function() {
             next();
 
             // 绑定图片onmouseover事件
-            $("#container").on("mouseover", ".divImg", function(event) {
+            $("#container").on("mouseover", ".divNode", function(event) {
                 event.preventDefault();
                 // TODO: 如图片未完全载入，则中止
                 
-                // div重新定位
-                $(this).css("left", getElementLeft(this));
-                $(this).css("top", getElementTop(this));
-                $(this).width($(this).children().first().width()); 
-                $(this).height($(this).children().first().height()); 
+                // 未弹出层时响应
+                if ($($(this).children()[2]).css("display") != "block") {
+                    // div重新定位
+                    $(this).css("left", getElementLeft(this));
+                    $(this).css("top", getElementTop(this));
+                    $(this).width($($(this).children()[0]).width()); 
+                    $(this).height($($(this).children()[0]).height()); 
 
-                // 切换显示图片或文字说明
-                $($(this).children()[0]).toggleClass("dn");
-                $($(this).children()[1]).toggleClass("dn");
+                    // 切换显示图片或文字说明
+                    $(this).children().addClass("dn");
+                    $($(this).children()[1]).removeClass("dn");
+                }
             });
 
             // 绑定图片onmouseout事件
-            $("#container").on("mouseout", ".divImg", function(event) {
+            $("#container").on("mouseout", ".divNode", function(event) {
                 event.preventDefault();
 
-                // 切换显示图片或文字说明
-                $($(this).children()[0]).toggleClass("dn");
-                $($(this).children()[1]).toggleClass("dn");
+                // 未弹出层时响应
+                if ($($(this).children()[2]).css("display") != "block") {
+                    $(this).children().addClass("dn");
+                    $($(this).children()[0]).removeClass("dn");
+                }
             });
 
             // 绑定图片点击事件
-            $("#container").on("click", ".divImg", function(event) {
+            $("#container").on("click", ".divNode", function(event) {
                 event.preventDefault();
 
                 // 弹出层
-                var json = $(this).attr("json");
-                pop(json);
+                pop($(this));
             });
         }
     });
@@ -65,7 +71,7 @@ $(document).ready(function() {
 
     // 点击背景层关闭弹出层
     $(document).on("click", function(e) {
-        if ($(e.target).closest("#pop").length > 0) {
+        if ($(e.target).closest(".z1000").length > 0) {
         } else {
             closePopContainer();
         }
@@ -73,74 +79,51 @@ $(document).ready(function() {
 });
 
 // 点击图片弹出层
-var pop = function(json) {
-    if (json !== 'undefined' && json !== "") {
-        $("#pop").html("");
-        showIosNotify("Loading...");
-
-        // 获取作品json
-        $.ajax({url: "data/json/" + json,
-            success: function(data) {
-                $("#backdrop").removeClass("dn");
-                $("#popContainer").fadeIn(2000, function() {
-                    $("#popContainer").removeClass("dn");
-                });
-
-                var popData;
-                if (typeof(data) == "string") {
-                    popData = $.parseJSON(data);
-                } else {
-                    popData = data;
-                }
-
-                // 先在不可见区域下载图片
-                $.each(popData, function(i, v) {
-                    $("#invisible").append("<img src='data/images/" + v + "' />");
-                });
-
-                // 全部图片下载完成后显示弹出层
-                var loadedimages = 0;
-                $("#invisible img").load(function() {
-                    ++loadedimages; 
-                    if(loadedimages == popData.length){
-                        hideIosNotify();
-                        $("#pop").html($("#invisible").html());
-                        $("#invisible").html("");
-                    }
-                });
-            }
-        });
-    } 
+var pop = function(element) {
+    currentDiv = element;
+    $("#backdrop").removeClass("dn");
+    $(element).addClass("z1000");
+    $(element).children().addClass("dn");
+    $(element.children()[2]).removeClass("dn"); 
 };
 
 // 关闭弹出层
 var closePopContainer = function() {
-    $("#popContainer").stop();
+    $(currentDiv).removeClass("z1000");
+    $(currentDiv).children().addClass("dn");
+    $(currentDiv.children()[0]).removeClass("dn");
     hideIosNotify();
-    $("#popContainer").fadeOut(200, function() {
-        $("#backdrop").addClass("dn");
-        $("#popContainer").addClass("dn");
-    });
+    $("#backdrop").addClass("dn");
 };
 
 // 翻页
 var next = function() {
     var i = 0;
+    var strDiv = "";
     var text = "";
+    var imgPop = "";
     i = (page - 1) * perPage;
     
     for (var j = 0; i < objData.length && j < perPage; i++, j++) {
-        // 预读取图片宽高，延迟加载图片
-       // var item = objData[i];
-       //  imgReady("data/images/" + item.cover, function () {
-       //      $("#container").append("<div class='divImg' style='width: " + this.width + "; height: " + this.height + "'><img src='static/loader.gif' data-src='data/images/" + item.cover + "' json='" + item.json + "' /></div>");
-       //  });
-         
          text = objData[i].text;
+         imgPop = objData[i].pop;
+         if (imgPop == undefined) {
+             imgPop = "";
+         } else {
+             imgPop = "data/images/" + imgPop;
+         }
          if (text == undefined) {
              text = "";
          }
-         $("#container").append("<div class='divImg' json='" + objData[i].json + "' id='" + objData[i].cover + "'><img src='static/loader.gif' data-src='data/images/" + objData[i].cover + "' /><div class='divText dn'>" + text + "</div></div>");
+
+         // 创建节点
+         strDiv = "<div class='divNode' json='" + objData[i].json + "' id='" + objData[i].cover + "'>";
+        //<video src="data/201401211357340000.mov" style="vertical-align:bottom"></video>
+         strDiv += "<img class='divImg' src='static/loader.gif' data-src='data/images/" + objData[i].cover + "' />";
+         strDiv += "<div class='divText dn'>" + text + "</div>";
+         strDiv += "<div class='divPop dn'><img src='" + imgPop + "' /></div>";
+         strDiv += "</div>";
+         $("#container").append(strDiv);
     }
     page++;
     $("#container img").unveil();
