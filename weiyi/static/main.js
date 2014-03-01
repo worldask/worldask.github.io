@@ -35,6 +35,12 @@ $(document).ready(function() {
                     $(this).width($(this.children[0]).width()); 
                     $(this).height($(this.children[0]).height()); 
 
+                    // 重新设置视频播放器大小
+                    if ($(this.children[2].children[0]).is("video") === true) {
+                        $(this.children[2].children[0]).attr("width", $(this.children[0]).width());
+                        $(this.children[2].children[0]).attr("height", $(this.children[0]).height());
+                    }
+
                     // 链接层加上db样式，以使整个层可点击
                     if ($(this.children[1]).is(".divLink") === true) {
                         $(this.children[1]).addClass("db");
