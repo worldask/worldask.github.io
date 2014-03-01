@@ -28,16 +28,21 @@ $(document).ready(function() {
                 // TODO: 如图片未完全载入，则中止
                 
                 // 未弹出层时响应
-                if ($($(this).children()[2]).css("display") != "block") {
+                if ($(this.children[2]).css("display") != "block") {
                     // div重新定位
                     $(this).css("left", getElementViewLeft(this));
                     $(this).css("top", getElementViewTop(this));
-                    $(this).width($($(this).children()[0]).width()); 
-                    $(this).height($($(this).children()[0]).height()); 
+                    $(this).width($(this.children[0]).width()); 
+                    $(this).height($(this.children[0]).height()); 
+
+                    // 链接层加上db样式，以使整个层可点击
+                    if ($(this.children[1]).is(".divLink") === true) {
+                        $(this.children[1]).addClass("db");
+                    }
 
                     // 切换显示图片或文字说明
                     $(this).children().addClass("dn");
-                    $($(this).children()[1]).removeClass("dn");
+                    $(this.children[1]).removeClass("dn");
                 }
             });
 
@@ -46,9 +51,10 @@ $(document).ready(function() {
                 event.preventDefault();
 
                 // 未弹出层时响应
-                if ($($(this).children()[2]).css("display") != "block") {
+                if ($(this.children[2]).css("display") != "block") {
+                    $(this).has(".divLink").removeClass("db");
                     $(this).children().addClass("dn");
-                    $($(this).children()[0]).removeClass("dn");
+                    $(this.children[0]).removeClass("dn");
                 }
             });
 
@@ -57,7 +63,7 @@ $(document).ready(function() {
                 event.preventDefault();
 
                 // 未弹出层时响应
-                if ($($(this).children()[2]).css("display") != "block") {
+                if ($(this.children[2]).css("display") != "block") {
                     // 弹出层
                     pop($(this));
                 }
