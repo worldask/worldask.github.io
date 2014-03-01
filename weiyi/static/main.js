@@ -53,7 +53,7 @@ $(document).ready(function() {
             });
 
             // 绑定图片点击事件
-            $("#container").on("click", ".divNode", function(event) {
+            $("#container").on("click", ".divNode:has('.divText')", function(event) {
                 event.preventDefault();
 
                 // 未弹出层时响应
@@ -74,7 +74,7 @@ $(document).ready(function() {
 
     // 点击背景层关闭弹出层
     $(document).on("click", function(e) {
-        if ($(e.target).children().closest(".z1000").length > 0 || $(e.target).closest("img").length > 0 || $(e.target).closest("video").length > 0) {
+        if ($(e.target).children().closest(".z1000").length > 0 || $(e.target).children().closest(".divLink").length > 0 || $(e.target).closest("img").length > 0 || $(e.target).closest("video").length > 0) {
         } else {
             closePopContainer();
         }
@@ -127,24 +127,33 @@ var next = function() {
     
     for (var j = 0; i < objData.length && j < perPage; i++, j++) {
          text = objData[i].text;
+         if (text === undefined) {
+             text = "";
+         }
          mediaPop = objData[i].pop;
-         if (mediaPop == undefined) {
+         if (mediaPop === undefined) {
              mediaPop = "";
          } else {
              mediaPop = "data/images/" + mediaPop;
          }
-         if (text == undefined) {
-             text = "";
-         }
+         href = objData[i].href;
 
          // 创建节点
          strDiv = "<div class='divNode' id='" + objData[i].cover + "'>";
          strDiv += "<img class='divMedia' src='static/loader.gif' data-src='data/images/" + objData[i].cover + "' />";
-         strDiv += "<div class='divText dn'>" + text + "</div>";
-         if (mediaPop.indexOf(".mov") > 1) {
-             strDiv += "<div class='divPop dn'><video src='" + mediaPop + "' autoplay='autoplay'>您的浏览器不支持播放该视频</video></div>";
+         if (href !== undefined) {
+             // 如果是外部链接
+             strDiv += "<a href='" + href + "' target='_blank' class='divLink dn'>" + text + "</a>";
+             strDiv += "<div class='divPop dn'></div>";
          } else {
-             strDiv += "<div class='divPop dn'><img src='" + mediaPop + "' /></div>";
+             strDiv += "<div class='divText dn'>" + text + "</div>";
+
+             // 弹出的是视频还是图片
+             if (mediaPop.indexOf(".mov") > 1) {
+                 strDiv += "<div class='divPop dn'><video src='" + mediaPop + "' autoplay='autoplay'>您的浏览器不支持播放该视频</video></div>";
+             } else {
+                 strDiv += "<div class='divPop dn'><img src='" + mediaPop + "' /></div>";
+             }
          }
          strDiv += "</div>";
          $("#container").append(strDiv);
