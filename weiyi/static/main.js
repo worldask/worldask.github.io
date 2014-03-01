@@ -41,11 +41,6 @@ $(document).ready(function() {
                         $(this.children[2].children[0]).attr("height", $(this.children[0]).height());
                     }
 
-                    // 链接层加上db样式，以使整个层可点击
-                    if ($(this.children[1]).is(".divLink") === true) {
-                        $(this.children[1]).addClass("db");
-                    }
-
                     // 切换显示图片或文字说明
                     $(this).children().addClass("dn");
                     $(this.children[1]).removeClass("dn");
@@ -122,9 +117,12 @@ var pop = function(element) {
 // 关闭弹出层
 var closePopContainer = function() {
     $(".divTitle").remove();
-    $(currentDiv).children().addClass("dn");
-    $(currentDiv.children()[2]).removeClass("z1000 pa");
-    $(currentDiv.children()[0]).removeClass("dn");
+
+    if (currentDiv.length > 0) {
+        $(currentDiv).children().addClass("dn");
+        $(currentDiv.children()[2]).removeClass("z1000 pa");
+        $(currentDiv.children()[0]).removeClass("dn");
+    }
     hideIosNotify();
     $("#backdrop").addClass("dn");
 };
@@ -155,7 +153,7 @@ var next = function() {
          strDiv += "<img class='divMedia' src='static/loader.gif' data-src='data/images/" + objData[i].cover + "' />";
          if (href !== undefined) {
              // 如果是外部链接
-             strDiv += "<a href='" + href + "' target='_blank' class='divLink dn'>" + text + "</a>";
+             strDiv += "<div class='divLink dn'><a class='divLinkA db' href='" + href + "' target='_blank'>" + text + "</a></div>";
              strDiv += "<div class='divPop dn'></div>";
          } else {
              strDiv += "<div class='divText dn'>" + text + "</div>";

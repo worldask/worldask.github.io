@@ -17,6 +17,7 @@ img {margin: 0; padding: 0;}
 .divNode {float:left; table-layout: fixed; background-color: #FFF; word-wrap: break-word; overflow: hidden;}
 .divNode:hover {cursor: pointer;}
 .divMedia {vertical-align:bottom;}
-a.divLink {width: 100%; height:100%;}
+.divLink {width: 100%; height:100%;}
+a.divLinkA {width: 100%; height:100%;}
 .divPop {overflow: hidden; z-index: 900;}
 .divTitle {background-color: #FFF; width: 100%; position: absolute;}
