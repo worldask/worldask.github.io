@@ -107,16 +107,16 @@ var next = function() {
     var i = 0;
     var strDiv = "";
     var text = "";
-    var imgPop = "";
+    var mediaPop = "";
     i = (page - 1) * perPage;
     
     for (var j = 0; i < objData.length && j < perPage; i++, j++) {
          text = objData[i].text;
-         imgPop = objData[i].pop;
-         if (imgPop == undefined) {
-             imgPop = "";
+         mediaPop = objData[i].pop;
+         if (mediaPop == undefined) {
+             mediaPop = "";
          } else {
-             imgPop = "data/images/" + imgPop;
+             mediaPop = "data/images/" + mediaPop;
          }
          if (text == undefined) {
              text = "";
@@ -124,10 +124,13 @@ var next = function() {
 
          // 创建节点
          strDiv = "<div class='divNode' id='" + objData[i].cover + "'>";
-        //<video src="data/201401211357340000.mov" style="vertical-align:bottom"></video>
          strDiv += "<img class='divMedia' src='static/loader.gif' data-src='data/images/" + objData[i].cover + "' />";
          strDiv += "<div class='divText dn'>" + text + "</div>";
-         strDiv += "<div class='divPop dn'><img src='" + imgPop + "' /></div>";
+         if (mediaPop.indexOf(".mov") > 1) {
+             strDiv += "<div class='divPop dn'><video src='" + mediaPop + "' autoplay /></div>";
+         } else {
+             strDiv += "<div class='divPop dn'><img src='" + mediaPop + "' /></div>";
+         }
          strDiv += "</div>";
          $("#container").append(strDiv);
     }
