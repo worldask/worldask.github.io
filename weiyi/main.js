@@ -44,7 +44,7 @@ $(document).ready(function() {
             $("#container").on("mouseout", ".divNode", function(event) {
                 event.preventDefault();
 
-                // 未弹出层时响应
+            // 未弹出层时响应
             $(this).has(".divLink").removeClass("db");
             $(this).children().addClass("dn");
                 $(this.children[0]).removeClass("dn");
@@ -95,13 +95,18 @@ var pop = function(element) {
         // 显示弹出层
         var mediaPop = element.attr("src");
         var strDiv = "";
-         if (mediaPop.indexOf(videoFormat) > 1) {
-             strDiv += "<video src='" + mediaPop + "' controls preload></video>";
-         } else {
-             strDiv += "<img src='" + mediaPop + "' />";
-         }
-         $("#pop").html(strDiv);
+        if (mediaPop.indexOf(videoFormat) > 1) {
+            strDiv += "<video src='" + mediaPop + "' controls preload></video>";
+        } else {
+            strDiv += "<img src='" + mediaPop + "' />";
+        }
+        $("#pop").html(strDiv);
 
+        // 重新设置视频播放器大小
+        if ($("#pop video").is("video") === true) {
+             $("#pop video").attr("width", element.width());
+             $("#pop video").attr("height", element.height());
+        }
 
         // 增加监听器，以解决ios safari不会自动播放视频的问题
         $("#pop").children()[0].addEventListener('touchstart', function(event) {
