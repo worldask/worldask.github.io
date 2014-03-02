@@ -13,7 +13,7 @@ var videoFormat = ".mov";
 
 $(document).ready(function() {
     // 首次载入，获取主json
-    $.ajax({url: "data/main.json", 
+    $.ajax({url: "main.json", 
         success: function(data) {
             if (typeof(data) == "string") {
                 objData = $.parseJSON(data);
@@ -146,13 +146,13 @@ var next = function() {
          if (mediaPop === undefined) {
              mediaPop = "";
          } else {
-             mediaPop = "data/images/" + mediaPop;
+             mediaPop = "data/" + mediaPop;
          }
          href = objData[i].href;
 
          // 创建节点
          strDiv = "<div class='divNode' id='" + objData[i].cover + "'>";
-         strDiv += "<img class='divMedia' src='static/loader.gif' data-src='data/images/" + objData[i].cover + "' />";
+         strDiv += "<img class='divMedia' src='static/loader.gif' data-src='data/" + objData[i].cover + "' />";
          if (href !== undefined) {
              // 如果是外部链接
              strDiv += "<div class='divLink dn'><a class='divLinkA db' href='" + href + "' target='_blank'>" + text + "</a></div>";
