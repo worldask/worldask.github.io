@@ -172,7 +172,7 @@ var next = function() {
 
              // 弹出的是视频还是图片
              if (mediaPop.indexOf(videoFormat) > 1) {
-                 strDiv += "<div class='divPop dn'><video src='" + mediaPop + "' autoplay></video></div>";
+                 strDiv += "<div class='divPop dn'><video src='" + mediaPop + "' controls preload></video></div>";
              } else {
                  strDiv += "<div class='divPop dn'><img src='" + mediaPop + "' /></div>";
              }
