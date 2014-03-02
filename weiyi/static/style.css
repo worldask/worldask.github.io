@@ -21,4 +21,4 @@ img {margin: 0; padding: 0;}
 a.divLinkA {width: 100%; height:100%;}
 .divPop {overflow: hidden;}
 .divPop:hover {cursor: default;}
-.divTitle {background-color: #FFF; width: 100%; position: absolute;}
+.divTitle {background-color: #FFF; width: 100%; position: fixed;}

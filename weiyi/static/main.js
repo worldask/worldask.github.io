@@ -110,8 +110,10 @@ var pop = function(element) {
         var divTitle = "<div class='divTitle'>&nbsp;&nbsp;<a href='javascript:' id='close'>close</a></div>";
         $("#container").append(divTitle);
         $(".divTitle").prepend(element.attr("title"));
-        $(".divTitle").css("top", getElementTop(element[0]) - $(".divTitle").first().height()); 
-        $(".divTitle").css("left", getElementLeft(element[0])); 
+        //$(".divTitle").css("top", getElementTop(element[0]) - $(".divTitle").first().height()); 
+        //$(".divTitle").css("left", getElementLeft(element[0])); 
+        $(".divTitle").css("top", 0); 
+        $(".divTitle").css("left", 0); 
         $(".divTitle").addClass("z1000");
     }
 };
