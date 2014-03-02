@@ -105,13 +105,16 @@ var pop = function(element) {
         $(element.children()[2]).addClass("z1000 pa");
         $(element).children().addClass("dn");
         $(element.children()[2]).removeClass("dn"); 
+
+        // 增加监听器，以解决ios safari不会自动播放视频的问题
+        $(element.children()[2]).children().first()[0].addEventListener('touchstart', function(event) {
+             this.play();
+        }, false);
         
         // 创建标题栏
         var divTitle = "<div class='divTitle'>&nbsp;&nbsp;<a href='javascript:' id='close'>close</a></div>";
         $("#container").append(divTitle);
         $(".divTitle").prepend(element.attr("title"));
-        //$(".divTitle").css("top", getElementTop(element[0]) - $(".divTitle").first().height()); 
-        //$(".divTitle").css("left", getElementLeft(element[0])); 
         $(".divTitle").css("top", 0); 
         $(".divTitle").css("left", 0); 
         $(".divTitle").addClass("z1000");
