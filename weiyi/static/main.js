@@ -109,7 +109,7 @@ var pop = function(element) {
         // 创建标题栏
         var divTitle = "<div class='divTitle'>&nbsp;&nbsp;<a href='javascript:' id='close'>close</a></div>";
         $("#container").append(divTitle);
-        $(".divTitle").prepend($(element.children()[1]).html());
+        $(".divTitle").prepend(element.attr("title"));
         $(".divTitle").css("top", getElementTop(element[0]) - $(".divTitle").first().height()); 
         $(".divTitle").css("left", getElementLeft(element[0])); 
         $(".divTitle").addClass("z1000");
@@ -134,6 +134,7 @@ var next = function() {
     var i = 0;
     var strDiv = "";
     var text = "";
+    var title = "";
     var mediaPop = "";
     i = (page - 1) * perPage;
     
@@ -141,6 +142,10 @@ var next = function() {
          text = objData[i].text;
          if (text === undefined) {
              text = "";
+         }
+         title = objData[i].title;
+         if (title === undefined) {
+             title = "";
          }
          mediaPop = objData[i].pop;
          if (mediaPop === undefined) {
@@ -151,7 +156,7 @@ var next = function() {
          href = objData[i].href;
 
          // 创建节点
-         strDiv = "<div class='divNode' id='" + objData[i].cover + "'>";
+         strDiv = "<div class='divNode' id='" + objData[i].cover + "' title='" + title + "'>";
          strDiv += "<img class='divMedia' src='static/loader.gif' data-src='data/" + objData[i].cover + "' />";
          if (href !== undefined) {
              // 如果是外部链接
