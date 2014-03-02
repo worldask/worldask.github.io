@@ -29,24 +29,15 @@ $(document).ready(function() {
                 event.preventDefault();
                 // TODO: 如图片未完全载入，则中止
                 
-                // 未弹出层时响应
-                if ($(this.children[2]).css("display") != "block") {
-                    // div重新定位
-                    $(this).css("left", getElementViewLeft(this));
-                    $(this).css("top", getElementViewTop(this));
-                    $(this).width($(this.children[0]).width()); 
-                    $(this).height($(this.children[0]).height()); 
+                // div重新定位
+                $(this).css("left", getElementViewLeft(this));
+                $(this).css("top", getElementViewTop(this));
+                $(this).width($(this.children[0]).width()); 
+                $(this).height($(this.children[0]).height()); 
 
-                    // 重新设置视频播放器大小
-                    if ($(this.children[2].children[0]).is("video") === true) {
-                        $(this.children[2].children[0]).attr("width", $(this.children[0]).width());
-                        $(this.children[2].children[0]).attr("height", $(this.children[0]).height());
-                    }
-
-                    // 切换显示图片或文字说明
-                    $(this).children().addClass("dn");
-                    $(this.children[1]).removeClass("dn");
-                }
+                // 切换显示图片或文字说明
+                $(this).children().addClass("dn");
+                $(this.children[1]).removeClass("dn");
             });
 
             // 绑定图片onmouseout事件
@@ -54,11 +45,9 @@ $(document).ready(function() {
                 event.preventDefault();
 
                 // 未弹出层时响应
-                if ($(this.children[2]).css("display") != "block") {
-                    $(this).has(".divLink").removeClass("db");
-                    $(this).children().addClass("dn");
-                    $(this.children[0]).removeClass("dn");
-                }
+            $(this).has(".divLink").removeClass("db");
+            $(this).children().addClass("dn");
+                $(this.children[0]).removeClass("dn");
             });
 
             // 绑定图片点击事件
@@ -66,7 +55,7 @@ $(document).ready(function() {
                 event.preventDefault();
 
                 // 未弹出层时响应
-                if ($(this.children[2]).css("display") != "block") {
+                if ($("#pop").css("display") != "block") {
                     // 弹出层
                     pop($(this));
                 }
@@ -83,7 +72,7 @@ $(document).ready(function() {
 
     // 点击背景层关闭弹出层
     $(document).on("click", function(e) {
-        if ($(e.target).children().closest(".z1000").length > 0 || $(e.target).children().closest(".divLink").length > 0 || $(e.target).closest("img").length > 0 || $(e.target).closest("video").length > 0) {
+        if ($(e.target).closest(".pop").length > 0 || $(e.target).closest("#pop").length > 0) {
         } else {
             closePopContainer();
         }
@@ -100,36 +89,40 @@ var pop = function(element) {
     currentDiv = element;
 
     // 存在图片或视频才弹出
-    if ($(element.children()[2]).children().first().attr("src") != "") {
+    if (element.attr("src") != "") {
         $("#backdrop").removeClass("dn");
-        $(element.children()[2]).addClass("z1000 pa");
-        $(element).children().addClass("dn");
-        $(element.children()[2]).removeClass("dn"); 
+
+        // 显示弹出层
+        var mediaPop = element.attr("src");
+        var strDiv = "";
+         if (mediaPop.indexOf(videoFormat) > 1) {
+             strDiv += "<video src='" + mediaPop + "' controls preload></video>";
+         } else {
+             strDiv += "<img src='" + mediaPop + "' />";
+         }
+         $("#pop").html(strDiv);
+
 
         // 增加监听器，以解决ios safari不会自动播放视频的问题
-        $(element.children()[2]).children().first()[0].addEventListener('touchstart', function(event) {
+        $("#pop").children()[0].addEventListener('touchstart', function(event) {
              this.play();
         }, false);
+        $("#pop").removeClass("dn");
+        element.addClass("pop");
         
         // 创建标题栏
         var divTitle = "<div class='divTitle'>&nbsp;&nbsp;<a href='javascript:' id='close'>close</a></div>";
         $("#container").append(divTitle);
         $(".divTitle").prepend(element.attr("title"));
-        $(".divTitle").css("top", 0); 
-        $(".divTitle").css("left", 0); 
-        $(".divTitle").addClass("z1000");
     }
 };
 
 // 关闭弹出层
 var closePopContainer = function() {
     $(".divTitle").remove();
+    $(".pop").removeClass("pop");
+    $("#pop").addClass("dn");
 
-    if (currentDiv.length > 0) {
-        $(currentDiv).children().addClass("dn");
-        $(currentDiv.children()[2]).removeClass("z1000 pa");
-        $(currentDiv.children()[0]).removeClass("dn");
-    }
     hideIosNotify();
     $("#backdrop").addClass("dn");
 };
@@ -152,30 +145,22 @@ var next = function() {
          if (title === undefined) {
              title = "";
          }
-         mediaPop = objData[i].pop;
-         if (mediaPop === undefined) {
-             mediaPop = "";
+         media = objData[i].pop;
+         if (media === undefined) {
+             media = "";
          } else {
-             mediaPop = "data/" + mediaPop;
+             media = "data/" + media;
          }
          href = objData[i].href;
 
          // 创建节点
-         strDiv = "<div class='divNode' id='" + objData[i].cover + "' title='" + title + "'>";
-         strDiv += "<img class='divMedia' src='static/loader.gif' data-src='data/" + objData[i].cover + "' />";
+         strDiv = "<div class='divNode' id='" + objData[i].cover + "' title='" + title + "' src='" + media + "'>";
+         strDiv += "<img class='divImg' src='static/loader.gif' data-src='data/" + objData[i].cover + "' />";
          if (href !== undefined) {
              // 如果是外部链接
              strDiv += "<div class='divLink dn'><a class='divLinkA db' href='" + href + "' target='_blank'>" + text + "</a></div>";
-             strDiv += "<div class='divPop dn'></div>";
          } else {
              strDiv += "<div class='divText dn'>" + text + "</div>";
-
-             // 弹出的是视频还是图片
-             if (mediaPop.indexOf(videoFormat) > 1) {
-                 strDiv += "<div class='divPop dn'><video src='" + mediaPop + "' controls preload></video></div>";
-             } else {
-                 strDiv += "<div class='divPop dn'><img src='" + mediaPop + "' /></div>";
-             }
          }
          strDiv += "</div>";
          $("#container").append(strDiv);

@@ -6,20 +6,18 @@ img {margin: 0; padding: 0;}
 /* common */
 .dn {display: none;}
 .db {display: block;}
-.z1000 {z-index: 1000;}
-.pa {position: absolute;}
 
 /* special */
 #head {left:0px; background:#cccccc; text-decoration: none; width:100%; position: fixed;}
 #container {padding-top: 17px;}
 #backdrop {background-color: #000; bottom: 0; left: 0; position: fixed; right: 0; top: 0; opacity: 0.6; z-index: 800;}
+#pop {position:fixed; top: 17px; left: 0; background-color: #FFF; z-index: 1000; vertical-align:bottom;}
+#pop img, #pop video {vertical-align:bottom;}
+#pop:hover {cursor: default;}
 #invisible {left: -10000px;}
 .divNode {float:left; table-layout: fixed; background-color: #FFF; word-wrap: break-word; overflow: hidden;}
 .divNode:hover {cursor: pointer;}
-.divMedia {vertical-align:bottom;}
+.divImg {vertical-align:bottom;}
 .divLink {width: 100%; height:100%;}
 a.divLinkA {width: 100%; height:100%;}
-.divPop {position:fixed; top: 17px; left: 0; overflow: hidden; background-color: #FFF;}
-.divPop img, .divPop video {vertical-align:bottom;}
-.divPop:hover {cursor: default;}
-.divTitle {background-color: #FFF; width: 100%; position: fixed;}
+.divTitle {background-color: #FFF; width: 100%; position: fixed; z-index: 1000; top: 0; left: 0;}
