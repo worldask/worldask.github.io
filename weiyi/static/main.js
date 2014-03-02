@@ -8,6 +8,8 @@ var objData = {};
 var scrollPixles = 20;
 // 当前打开的div
 var currentDiv = {};
+// 视频格式
+var videoFormat = ".mov";
 
 $(document).ready(function() {
     // 首次载入，获取主json
@@ -159,8 +161,8 @@ var next = function() {
              strDiv += "<div class='divText dn'>" + text + "</div>";
 
              // 弹出的是视频还是图片
-             if (mediaPop.indexOf(".mov") > 1) {
-                 strDiv += "<div class='divPop dn'><video src='" + mediaPop + "' autoplay='autoplay'>您的浏览器不支持播放该视频</video></div>";
+             if (mediaPop.indexOf(videoFormat) > 1) {
+                 strDiv += "<div class='divPop dn'><video src='" + mediaPop + "' autoplay></video></div>";
              } else {
                  strDiv += "<div class='divPop dn'><img src='" + mediaPop + "' /></div>";
              }
