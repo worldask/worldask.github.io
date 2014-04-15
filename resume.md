@@ -10,16 +10,17 @@
 * QQ：4349642
 
 ## 技能简介
-* 熟悉原生JavaScript及各种前端上的新鲜玩意；因工作限制，目前杂而不精，但有浓厚兴趣折腾各种前端库、框架，希望未来能够在专注在前端技术领域
+* 熟悉原生JavaScript及各种前端上的新鲜玩意；因工作限制，目前杂而不精，但有浓厚兴趣折腾各种前端库、框架，希望未来能够专注于前端技术领域
 * 熟悉基于Linux平台上的PHP + MySql架构开发B/S系统
 * 熟悉基于Windows平台上的C# + MS Sql Server架构开发B/S系统
+* 有iOS和Android开发经验
 * Vimer
 
 ## 项目经历
 ### [集珍坊](http://www.jizhenfang.com) 
 * 概述
     * 项目简介：艺术投资品交易平台，包括管理后台、移动端网站及内嵌WebView实现的Android客户端，筹备中的iOS客户端
-    * 项目进度：未上线运营
+    * 项目进度：开发中
     * 开发周期：2013年11月至2014年3月
     * 担任职务：项目管理
     * 团队人数：3名程序员
@@ -32,8 +33,8 @@
         
 ### [UNO](http://worldask.github.io/uno/www/)
 * 概述
-    * 项目简介：UNO纸牌游戏，个人兴趣制作。纯JavaScript，基于Cocos2d-x HTML5实现，使用PhoneGap打包生成iOS和Android客户端
-    * 项目进度：完成游戏基本功能，仍有部分Bug。Firefox和Safari上可运行；近期换用RequireJS后，在Chrome上未调试通过，似乎是Chrom32+对WebGL的支持问题，待确认。
+    * 项目简介：UNO纸牌游戏，个人兴趣制作。纯JavaScript，基于[Cocos2d-HTML5](http://www.cocos2d-html5.org)实现，使用[PhoneGap](http://phonegap.com/)打包生成iOS和Android客户端
+    * 项目进度：完成游戏基本功能，仍有部分Bug。Firefox和Safari上可运行；近期应用[RequireJS](http://requirejs.org/)后，在Chrome上未调试通过，似乎是Chrom32+对WebGL的支持问题，待确认。
     * 开发周期：2013年3月
 
 ### 星河战队
