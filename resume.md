@@ -50,7 +50,7 @@
     * 存储：MySql，MemCache
     * 服务端：PHP, [CodeIgniter](http://ellislab.com/codeigniter)
     * 前端：[jQuery](http://jquery.com/)
-    * 项目管理：禅道
+    * 项目管理：[禅道](http://www.zentao.net/)
 
 ### [百惠网](http://www.befree.com.cn)
 * 概述
