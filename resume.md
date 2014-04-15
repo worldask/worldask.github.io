@@ -36,6 +36,7 @@
     * 项目简介：UNO纸牌游戏，个人兴趣制作。纯JavaScript，基于[Cocos2d-HTML5](http://www.cocos2d-html5.org)实现，使用[PhoneGap](http://phonegap.com/)打包生成iOS和Android客户端
     * 项目进度：完成游戏基本功能，仍有部分Bug。Firefox和Safari上可运行；近期应用[RequireJS](http://requirejs.org/)后，在Chrome上未调试通过，似乎是Chrom32+对WebGL的支持问题，待确认。
     * 开发周期：2013年3月
+    * 项目管理：[Trello](https://trello.com)
 
 ### 星河战队
 * 概述
