@@ -27,7 +27,7 @@
     * 存储：MySql 5.6
     * 服务端：PHP，[Laravel](http://ellislab.com/codeigniter)
     * 前端：[AngularJS](http://angularjs.org/)，[Bootstrap](https://github.com/twbs/bootstrap)
-    * 项目管理：[GitLab](https://www.gitlab.com/), [风车](https://fengche.co)
+    * 项目管理：[GitLab](https://www.gitlab.com/), [风车](https://fengche.co)
     
 ### [集珍坊](http://www.jizhenfang.com) 
 * 概述
