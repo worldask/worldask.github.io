@@ -25,7 +25,7 @@
 * 使用技术
     * 服务器：CentOS 7.3
     * 存储：MySql 5.6
-    * 服务端：PHP，[Laravel](http://ellislab.com/codeigniter)
+    * 服务端：PHP，[Laravel](https://laravel.com/)
     * 前端：[AngularJS](http://angularjs.org/)，[Bootstrap](https://github.com/twbs/bootstrap)
     * 项目管理：[GitLab](https://www.gitlab.com/), [风车](https://fengche.co)
     
