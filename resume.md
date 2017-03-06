@@ -10,10 +10,9 @@
 * QQ：
 
 ## 技能简介
-* 熟悉基于Linux平台上的PHP + MySql架构开发B/S系统
-* 熟悉基于Windows平台上的C# + MS Sql Server架构开发B/S系统
-* 有iOS和Android开发经验
-* Vimer
+* 丰富的基于LAMP架构的Web开发经验及服务器运维经验
+* 熟悉基于.Net架构的开发
+* 熟悉微信、iOS和Android开发
 
 ## 项目经历
 ### [美生活](http://www.mei-shenghuo.com) 
