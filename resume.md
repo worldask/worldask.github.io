@@ -10,13 +10,25 @@
 * QQ：
 
 ## 技能简介
-* 熟悉原生JavaScript及各种前端上的新鲜玩意，希望未来能够专注于前端技术领域
 * 熟悉基于Linux平台上的PHP + MySql架构开发B/S系统
 * 熟悉基于Windows平台上的C# + MS Sql Server架构开发B/S系统
 * 有iOS和Android开发经验
 * Vimer
 
 ## 项目经历
+### [美生活](http://www.mei-shenghuo.com) 
+* 概述
+    * 项目简介：社区O2o平台及物业管理软件，包括O2O运营后台、微信网站，物业管理系统Web端、iOS端、Android客户端等    * 项目进度：已上线
+    * 开发周期：2015年5月至今
+    * 担任职务：技术管理
+    * 团队人数：8名服务端程序员，1名iOS程序员，1名Android程序员
+* 使用技术
+    * 服务器：CentOS 7.3
+    * 存储：MySql 5.6
+    * 服务端：PHP，[Laravel](http://ellislab.com/codeigniter)
+    * 前端：[AngularJS](http://angularjs.org/)，[Bootstrap](https://github.com/twbs/bootstrap)
+    * 项目管理：[GitLab](https://www.gitlab.com/), [风车](https://fengche.co)
+    
 ### [集珍坊](http://www.jizhenfang.com) 
 * 概述
     * 项目简介：艺术投资品交易平台，包括管理后台、移动端网站及内嵌WebView实现的Android客户端，筹备中的iOS客户端
